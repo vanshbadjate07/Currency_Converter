@@ -110,75 +110,117 @@ const currencies = [
     { code: 'NPR', country: 'Nepal', currency: 'Nepalese Rupee' },
     { code: 'NZD', country: 'New Zealand', currency: 'New Zealand Dollar' },
     { code: 'OMR', country: 'Oman', currency: 'Omani Rial' },
-    { code: 'PAB', country: 'Panama', currency: 'Panamanian Balboa' }]
+    { code: 'PAB', country: 'Panama', currency: 'Panamanian Balboa' },
+    { code: 'PEN', country: 'Peru', currency: 'Peruvian Sol' },
+    { code: 'PGK', country: 'Papua New Guinea', currency: 'Papua New Guinean Kina' },
+    { code: 'PHP', country: 'Philippines', currency: 'Philippine Peso' },
+    { code: 'PKR', country: 'Pakistan', currency: 'Pakistani Rupee' },
+    { code: 'PLN', country: 'Poland', currency: 'Polish Złoty' },
+    { code: 'PYG', country: 'Paraguay', currency: 'Paraguayan Guarani' },
+    { code: 'QAR', country: 'Qatar', currency: 'Qatari Riyal' },
+    { code: 'RON', country: 'Romania', currency: 'Romanian Leu' },
+    { code: 'RSD', country: 'Serbia', currency: 'Serbian Dinar' },
+    { code: 'RUB', country: 'Russia', currency: 'Russian Ruble' },
+    { code: 'RWF', country: 'Rwanda', currency: 'Rwandan Franc' },
+    { code: 'SAR', country: 'Saudi Arabia', currency: 'Saudi Riyal' },
+    { code: 'SBD', country: 'Solomon Islands', currency: 'Solomon Islands Dollar' },
+    { code: 'SCR', country: 'Seychelles', currency: 'Seychellois Rupee' },
+    { code: 'SDG', country: 'Sudan', currency: 'Sudanese Pound' },
+    { code: 'SEK', country: 'Sweden', currency: 'Swedish Krona' },
+    { code: 'SGD', country: 'Singapore', currency: 'Singapore Dollar' },
+    { code: 'SHP', country: 'Saint Helena', currency: 'Saint Helena Pound' },
+    { code: 'SLL', country: 'Sierra Leone', currency: 'Sierra Leonean Leone' },
+    { code: 'SOS', country: 'Somalia', currency: 'Somali Shilling' },
+    { code: 'SRD', country: 'Suriname', currency: 'Surinamese Dollar' },
+    { code: 'SSP', country: 'South Sudan', currency: 'South Sudanese Pound' },
+    { code: 'STN', country: 'São Tomé and Príncipe', currency: 'São Tomé and Príncipe Dobra' },
+    { code: 'SYP', country: 'Syria', currency: 'Syrian Pound' },
+    { code: 'SZL', country: 'Eswatini', currency: 'Eswatini Lilangeni' },
+    { code: 'THB', country: 'Thailand', currency: 'Thai Baht' },
+    { code: 'TJS', country: 'Tajikistan', currency: 'Tajikistani Somoni' },
+    { code: 'TMT', country: 'Turkmenistan', currency: 'Turkmenistani Manat' },
+    { code: 'TND', country: 'Tunisia', currency: 'Tunisian Dinar' },
+    { code: 'TOP', country: 'Tonga', currency: 'Tongan Paʻanga' },
+    { code: 'TRY', country: 'Turkey', currency: 'Turkish Lira' },
+    { code: 'TTD', country: 'Trinidad and Tobago', currency: 'Trinidad and Tobago Dollar' },
+    { code: 'TVD', country: 'Tuvalu', currency: 'Tuvaluan Dollar' },
+    { code: 'TWD', country: 'Taiwan', currency: 'New Taiwan Dollar' },
+    { code: 'TZS', country: 'Tanzania', currency: 'Tanzanian Shilling' },
+    { code: 'UAH', country: 'Ukraine', currency: 'Ukrainian Hryvnia' },
+    { code: 'UGX', country: 'Uganda', currency: 'Ugandan Shilling' },
+    { code: 'UYU', country: 'Uruguay', currency: 'Uruguayan Peso' },
+    { code: 'UZS', country: 'Uzbekistan', currency: 'Uzbekistani Som' },
+    { code: 'VES', country: 'Venezuela', currency: 'Venezuelan Bolívar' },
+    { code: 'VND', country: 'Vietnam', currency: 'Vietnamese Đồng' },
+    { code: 'VUV', country: 'Vanuatu', currency: 'Vanuatu Vatu' },
+    { code: 'WST', country: 'Samoa', currency: 'Samoan Tālā' },
+    { code: 'XAF', country: 'Central African CFA franc', currency: 'Central African CFA Franc' },
+    { code: 'XCD', country: 'East Caribbean Dollar', currency: 'East Caribbean Dollar' },
+    { code: 'XDR', country: 'Special Drawing Rights', currency: 'Special Drawing Rights' },
+    { code: 'XOF', country: 'West African CFA franc', currency: 'West African CFA Franc' },
+    { code: 'XPF', country: 'CFP franc', currency: 'CFP Franc' },
+    { code: 'YER', country: 'Yemen', currency: 'Yemeni Rial' },
+    { code: 'ZAR', country: 'South Africa', currency: 'South African Rand' },
+    { code: 'ZMW', country: 'Zambia', currency: 'Zambian Kwacha' },
+    { code: 'ZWL', country: 'Zimbabwe', currency: 'Zimbabwean Dollar' }
+];
 
+const fromCurrencyList = document.getElementById('fromCurrencyList');
+const toCurrencyList = document.getElementById('toCurrencyList');
 
-window.onload = function() {
-    const fromCurrency = document.getElementById('fromCurrency');
-    const toCurrency = document.getElementById('toCurrency');
-
+function populateCurrencyList() {
     currencies.forEach(currency => {
-        let option = document.createElement('option');
-        option.value = currency.code;
-        option.text = `${currency.country} - ${currency.currency} (${currency.code})`;
-        fromCurrency.add(option);
-
-        option = document.createElement('option');
-        option.value = currency.code;
-        option.text = `${currency.country} - ${currency.currency} (${currency.code})`;
-        toCurrency.add(option);
+        const option = document.createElement('option');
+        option.value = `${currency.country} (${currency.currency}) [${currency.code}]`;
+        fromCurrencyList.appendChild(option);
+        toCurrencyList.appendChild(option.cloneNode(true));
     });
-
-    fromCurrency.value = 'USD';
-    toCurrency.value = 'EUR';
-};
-
-function showError(message) {
-    const errorElement = document.getElementById('error');
-    errorElement.innerText = message;
 }
 
-async function convertCurrency() {
+populateCurrencyList();
+
+document.getElementById('convertButton').addEventListener('click', () => {
     const fromCurrency = document.getElementById('fromCurrency').value;
     const toCurrency = document.getElementById('toCurrency').value;
     const amount = document.getElementById('amount').value;
 
-    if (!amount) {
-        alert('Please enter an amount to convert');
+    const fromCurrencyCode = getCurrencyCode(fromCurrency);
+    const toCurrencyCode = getCurrencyCode(toCurrency);
+
+    if (!fromCurrencyCode || !toCurrencyCode || !amount) {
+        showError('Please fill in all fields correctly.');
         return;
     }
 
-    if (fromCurrency === toCurrency) {
-        showError('From and To currencies cannot be the same');
-        return;
-    }
+    convertCurrency(fromCurrencyCode, toCurrencyCode, amount);
+});
+
+function getCurrencyCode(currency) {
+    const match = currency.match(/\[(.*?)\]/);
+    return match ? match[1] : null;
+}
+
+function showError(message) {
+    const errorDiv = document.getElementById('error');
+    errorDiv.textContent = message;
+}
+
+async function convertCurrency(fromCurrency, toCurrency, amount) {
+    const apiKey = '03f29b9552fb2d65b4ae6302';
+    const apiUrl = `https://v6.exchangerate-api.com/v6/${apiKey}/pair/${fromCurrency}/${toCurrency}`;
 
     try {
-        const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch exchange rates (${response.status} ${response.statusText})`);
-        }
-
+        const response = await fetch(apiUrl);
         const data = await response.json();
 
-        if (!data.rates) {
-            throw new Error('Exchange rates data not available');
+        if (data.result === 'error') {
+            showError(data['error-type']);
+        } else {
+            const conversionRate = data.conversion_rate;
+            const convertedAmount = (amount * conversionRate).toFixed(2);
+            document.getElementById('result').textContent = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
         }
-
-        if (!data.rates[toCurrency]) {
-            throw new Error(`Exchange rate for ${toCurrency} not found`);
-        }
-
-        const rate = data.rates[toCurrency];
-        const convertedAmount = (amount * rate).toFixed(2);
-
-        document.getElementById('result').innerText = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
-        document.getElementById('rate').innerText = `Exchange Rate: 1 ${fromCurrency} = ${rate} ${toCurrency}`;
-
-        // Clear error message if conversion is successful
-        document.getElementById('error').innerText = '';
     } catch (error) {
-        showError(error.message);
+        showError('An error occurred. Please try again later.');
     }
 }
